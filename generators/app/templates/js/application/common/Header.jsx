@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Mui from 'material-ui';
-import Event from 'Event';
+import event from 'Event';
 
 class Header extends React.Component {
 
@@ -12,7 +12,12 @@ class Header extends React.Component {
 
     _onRightClick(e) {
         window.location.href = 'https://github.com/leftstick/generator-material-react';
-        Event.stop(e);
+        event.stop(e);
+    }
+
+    _onLeftClick(e) {
+        window.location.href = '/';
+        event.stop(e);
     }
 
     render() {
@@ -21,7 +26,8 @@ class Header extends React.Component {
         return <AppBar title="Put Title Here"
                  iconClassNameLeft="fa fa-html5"
                  iconElementRight={<IconButton iconClassName="fa fa-github-alt" tooltip="View Source" />}
-                 onRightIconButtonTouchTap={this._onRightClick}/>;
+                 onLeftIconButtonTouchTap={this._onLeftClick}
+                 onRightIconButtonTouchTap={this._onRightClick} />;
     }
 }
 

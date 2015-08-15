@@ -3,7 +3,8 @@
 import React from 'react';
 import Mui from 'material-ui';
 
-import Header from './common/Header';
+import Header from './common/Header.jsx';
+import Footer from './common/Footer.jsx';
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 
@@ -22,7 +23,12 @@ class Application extends React.Component {
     }
 
     render() {
-        return <Header/>;
+        return (
+            <div>
+              <Header/>
+              <Footer/>
+            </div>
+            );
     }
 }
 
