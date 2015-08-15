@@ -17,6 +17,7 @@
   "author": "<%= answers.username %> <% if(answers.email){ %><<%= answers.email %>><% } %>",
   "license": "MIT",
   "dependencies":{
+    "font-awesome": "^4.4.0",
     "lodash": "3.10.1",
     "react": "0.13.3",
     "material-ui": "0.10.4",

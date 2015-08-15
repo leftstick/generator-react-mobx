@@ -13,8 +13,6 @@ require.ensure([], function() {
 });
 
 require.ensure([], function() {
-
-    require('less/main.less');
-// var App = require('./main');
-// (new App()).run();
+    var Entrance = require('./fw/Entrance');
+    (new Entrance()).run();
 });

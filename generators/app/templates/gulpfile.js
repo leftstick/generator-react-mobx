@@ -10,23 +10,15 @@ gulp.task('release', function(callback) {
     var config = require('./webpack.config');
     var myConfig = Object.create(config);
 
-    myConfig.output.filename = '[hash].[name].bundle.js';
-    myConfig.output.chunkFilename = '[hash].[id].bundle.js';
-    myConfig.plugins.pop();
-    myConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('[hash].common.bundle.js'));
-
     require('rimraf').sync('build/');
 
-    myConfig.output.path = path.resolve(__dirname, 'build');
     myConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
         }
     }));
 
-    gulp.src(['etc/*', 'img/*', 'mock/*', 'favicon.ico'], {
-        'base': '.'
-    })
+    gulp.src(['img/*', 'favicon.ico'], {'base': '.'})
         .pipe(gulp.dest('build/'));
 
     webpack(myConfig, function(err, stats) {
@@ -34,9 +26,7 @@ gulp.task('release', function(callback) {
             throw new gutil.PluginError('webpack', err);
         }
         gutil.log('[webpack]', stats.toString());
-        gulp.src(['index.html'], {
-            'base': '.'
-        })
+        gulp.src(['index.html'], {'base': '.'})
             .pipe(replace('common.bundle.js', stats.hash + '.common.bundle.js'))
             .pipe(replace('index.bundle.js', stats.hash + '.index.bundle.js'))
             .pipe(gulp.dest('build/'))
@@ -51,17 +41,20 @@ gulp.task('dev', function(callback) {
     var myConfig = Object.create(config);
     myConfig.devtool = 'sourcemap';
     myConfig.debug = true;
+    myConfig.output.filename = myConfig.output.filename.replace(/\[hash\]\./, '');
+    myConfig.output.chunkFilename = myConfig.output.chunkFilename.replace(/\[hash\]\./, '');
+
+    myConfig.plugins.pop();
+    myConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('common.bundle.js'));
 
     new WebpackDevServer(webpack(myConfig), {
-        historyApiFallback: true
+        historyApiFallback: true,
+        publicPath: '/js/'
     }).listen(8080, 'localhost', function(err) {
         if (err) {
             throw new gutil.PluginError('webpack-dev-server', err);
         }
         // Server listening
         gutil.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html');
-
-    // keep the server alive or continue?
-    // callback();
     });
 });

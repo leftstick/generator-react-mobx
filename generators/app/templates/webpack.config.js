@@ -8,9 +8,10 @@ module.exports = {
         index: './js/index.js'
     },
     output: {
-        path: path.resolve(__dirname),
-        filename: '[name].bundle.js',
-        chunkFilename: '[id].bundle.js'
+        path: path.resolve(__dirname, 'build', 'js'),
+        filename: '[hash].[name].bundle.js',
+        chunkFilename: '[hash].[id].bundle.js',
+        publicPath: '/js/'
     },
     module: {
         loaders: [
@@ -35,10 +36,11 @@ module.exports = {
     },
     resolve: {
         root: [
-            path.resolve(__dirname)
+            path.resolve(__dirname),
+            path.resolve(__dirname, 'js', 'fw', 'lib')
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common.bundle.js')
+        new webpack.optimize.CommonsChunkPlugin('[hash].common.bundle.js')
     ]
 };
