@@ -23,11 +23,13 @@ class Header extends React.Component {
     render() {
         let AppBar = Mui.AppBar;
         let IconButton = Mui.IconButton;
-        return <AppBar title="Put Title Here"
-                 iconClassNameLeft="fa fa-html5"
-                 iconElementRight={<IconButton iconClassName="fa fa-github-alt" tooltip="View Source" />}
-                 onLeftIconButtonTouchTap={this._onLeftClick}
-                 onRightIconButtonTouchTap={this._onRightClick} />;
+        return (
+            <AppBar title="todos"
+              iconClassNameLeft="fa fa-html5"
+              iconElementRight={<IconButton iconClassName="fa fa-github-alt" tooltip="View Source" />}
+              onLeftIconButtonTouchTap={this._onLeftClick}
+              onRightIconButtonTouchTap={this._onRightClick} />
+            );
     }
 }
 

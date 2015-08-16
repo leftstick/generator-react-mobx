@@ -9,7 +9,7 @@
 
 require.ensure([], function() {
     require('splash-screen/splash.min.css');
-    require('splash-screen').enable();
+    require('splash-screen').enable('circular');
 });
 
 require.ensure([], function() {

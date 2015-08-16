@@ -1,8 +1,6 @@
 'use strict';
 
 import React from 'react';
-import Mui from 'material-ui';
-import event from 'Event';
 
 class Footer extends React.Component {
 
@@ -14,12 +12,14 @@ class Footer extends React.Component {
         let footerStyle = {
             display: 'block',
             width: '100%',
-            textAlign: 'center'
+            textAlign: 'center',
+            marginTop: '15px'
         };
         return (
             <footer style={footerStyle}>
               <span>{'\u00A9 2015 Howard.Zuo, All rights reserved.'}</span>
-            </footer>);
+            </footer>
+            );
     }
 }
 

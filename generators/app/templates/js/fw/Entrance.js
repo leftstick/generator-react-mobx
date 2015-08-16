@@ -21,7 +21,7 @@ class Entrance {
     }
 
     createApp() {
-        React.render(<Application />, document.querySelector('#view'));
+        React.render(<Application onLoad={this.destroySplash}/>, document.body);
     }
 
     destroySplash() {
@@ -33,7 +33,6 @@ class Entrance {
     run() {
         this.beforeStart();
         this.createApp();
-        this.destroySplash();
         this.launch();
     }
 

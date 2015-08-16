@@ -1,9 +1,11 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import Mui from 'material-ui';
 
 import Header from './common/Header.jsx';
+import Content from './todo/Content.jsx';
 import Footer from './common/Footer.jsx';
 
 let ThemeManager = new Mui.Styles.ThemeManager();
@@ -19,6 +21,9 @@ class Application extends React.Component {
     }
 
     componentWillMount() {
+        if (_.isFunction(this.props.onLoad)) {
+            this.props.onLoad();
+        }
         ThemeManager.setTheme(ThemeManager.types.LIGHT);
     }
 
@@ -26,6 +31,7 @@ class Application extends React.Component {
         return (
             <div>
               <Header/>
+              <Content/>
               <Footer/>
             </div>
             );
