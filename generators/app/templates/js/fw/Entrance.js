@@ -2,7 +2,7 @@
 
 import Splash from 'splash-screen';
 import React from 'react';
-import Application from 'js/application/Application';
+import Application from 'js/application/Application.jsx';
 
 class Entrance {
 
@@ -20,19 +20,16 @@ class Entrance {
         injectTapEventPlugin();
     }
 
-    createApp() {
-        React.render(<Application onLoad={this.destroySplash}/>, document.body);
-    }
-
-    destroySplash() {
+    _destroySplash() {
         Splash.destroy();
     }
 
-    launch() {}
+    launch() {
+        React.render(<Application onLoad={this._destroySplash}/>, document.body);
+    }
 
     run() {
         this.beforeStart();
-        this.createApp();
         this.launch();
     }
 

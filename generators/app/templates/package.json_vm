@@ -21,6 +21,7 @@
     "lodash": "3.10.1",
     "react": "0.13.3",
     "material-ui": "0.10.4",
+    "reflux": "^0.2.12",
     "splash-screen": "2.2.0"
   },
   "devDependencies": {

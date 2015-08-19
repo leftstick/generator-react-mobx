@@ -4,7 +4,7 @@ import React from 'react';
 import Mui from 'material-ui';
 import TodoInput from './TodoInput.jsx';
 
-class Title extends React.Component {
+class Panel extends React.Component {
 
     constructor(props) {
         super(props);
@@ -15,11 +15,8 @@ class Title extends React.Component {
             backgroundColor: Mui.Styles.Colors.blueGrey50
         };
 
-        if (this._getWindowWidth() <= 850) {
-            paperStyle.width = '100%';
-        }
-        this.state = {paperStyle};
-
+        let zDepth = 1;
+        this.state = {paperStyle, zDepth};
         this._onResize = _.debounce(this._onResize, 150).bind(this);
     }
 
@@ -32,12 +29,14 @@ class Title extends React.Component {
 
     _onResize(e) {
         let originalStyle = this.state.paperStyle;
+        let zDepth = 1;
         if (this._getWindowWidth() <= 850) {
             originalStyle.width = '100%';
+            zDepth = 0;
         } else {
             originalStyle.width = '850px';
         }
-        this.setState({paperStyle: originalStyle});
+        this.setState({paperStyle: originalStyle, zDepth: zDepth});
     }
 
     componentWillMount() {
@@ -52,11 +51,11 @@ class Title extends React.Component {
         let Paper = Mui.Paper;
 
         return (
-            <Paper style={this.state.paperStyle} zDepth={1} rounded={false}>
-              <TodoInput/>
+            <Paper style={this.state.paperStyle} zDepth={this.state.zDepth} rounded={false}>
+              { this.props.children }
             </Paper>
             );
     }
 }
 
-export default Title;
+export default Panel;
