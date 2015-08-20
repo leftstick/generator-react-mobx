@@ -7,7 +7,18 @@ import TodoItem from './TodoItem.jsx';
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {todos: [{id: 's', text: 'nidayede'},{id: 'gh', text: '我是谁的老大爷呢'}]};
+        this.state = {
+            todos: [
+                {
+                    id: 's',
+                    text: 'nidayede'
+                },
+                {
+                    id: 'gh',
+                    text: '我是谁的老大爷呢'
+                }
+            ]
+        };
     }
 
     render() {
@@ -18,10 +29,10 @@ class TodoList extends React.Component {
         let listStyle = {paddingTop: '0'};
 
         return (
-            <List style={listStyle}>
+            <List style={ listStyle }>
               { this.state.todos.map(function(todo, index) {
-                  return <TodoItem key={todo.id} data={todo} isLast={_this.state.todos.length -1 === index}/>;
-              })}
+                    return <TodoItem key={ todo.id } data={ todo } isLast={ _this.state.todos.length - 1 === index } />;
+                }) }
             </List>
             );
     }
