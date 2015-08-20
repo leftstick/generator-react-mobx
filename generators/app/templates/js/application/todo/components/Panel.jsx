@@ -12,7 +12,7 @@ class Panel extends React.Component {
             minHeight: '350px',
             width: '850px',
             margin: '5px auto 0 auto',
-            backgroundColor: Mui.Styles.Colors.blueGrey50
+            backgroundColor: '#fff'
         };
 
         let zDepth = 1;

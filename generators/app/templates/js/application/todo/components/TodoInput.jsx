@@ -10,14 +10,16 @@ class TodoInput extends React.Component {
 
     render() {
         let TextField = Mui.TextField;
-        let inputStyle = {margin: '0 40px'};
-        let inputUnderlineStyle = {marginLeft: '-40px'};
+        let inputStyle = {padding: '16px 16px 16px 60px', boxSizing: 'border-box'};
+        let underlineStyle = {marginLeft: '-60px', bottom: '0'};
 
         return (
-            <TextField hintText="What needs to be done?"
-              fullWidth={true}
-              style={inputStyle}
-              underlineStyle={inputUnderlineStyle}/>
+           <div>
+                <TextField hintText="What needs to be done?"
+                    fullWidth={true}
+                    style={inputStyle}
+                    underlineStyle={underlineStyle}/>
+           </div>
             );
     }
 }
