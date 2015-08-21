@@ -6,6 +6,14 @@ class TodoInput extends React.Component {
         super(props);
     }
 
+    _onSubmit(e) {
+        if (e.keyCode !== 13) {
+            return;
+        }
+        console.log(e.target.value);
+        e.target.value = '';
+    }
+
     render() {
         let TextField = Mui.TextField;
         let inputStyle = {
@@ -19,7 +27,8 @@ class TodoInput extends React.Component {
               <TextField hintText="What needs to be done?"
                 fullWidth={ true }
                 style={ inputStyle }
-                underlineStyle={ underlineStyle } />
+                underlineStyle={ underlineStyle }
+                onKeyUp={ this._onSubmit.bind(this) } />
             </div>
             );
     }

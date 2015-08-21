@@ -26,7 +26,10 @@ class TodoList extends React.Component {
         let ListItem = Mui.ListItem;
         let Checkbox = Mui.Checkbox;
         let _this = this;
-        let listStyle = {paddingTop: '0'};
+        let listStyle = {
+            paddingTop: '0',
+            display: this.state.todos.length ? 'block' : 'none'
+        };
 
         return (
             <List style={ listStyle }>
