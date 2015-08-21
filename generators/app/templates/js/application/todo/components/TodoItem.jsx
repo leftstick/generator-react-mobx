@@ -6,17 +6,24 @@ import Mui from 'material-ui';
 class TodoItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showDelete: false};
+        this.state = {showDelete: true};
     }
 
-    _showDeleteBtn(e){
-        console.log(e);
+    _showDeleteBtn(e) {
+        console.log(e)
         this.setState({showDelete: true});
     }
 
-    _hideDeleteBtn(e){
-        console.log('leave', e);
+    _hideDeleteBtn(e) {
         this.setState({showDelete: false});
+    }
+
+    _onDeleteItem(e) {
+        console.log('delete ID', this.props.data.id);
+    }
+
+    _onCheckItem(e, checked) {
+        console.log('check ID', this.props.data.id, checked);
     }
 
     render() {
@@ -24,12 +31,24 @@ class TodoItem extends React.Component {
         let ListDivider = Mui.ListDivider;
         let Checkbox = Mui.Checkbox;
         let IconButton = Mui.IconButton;
-        let itemStyle = {MozUserSelect: 'none', WebkitUserSelect: 'none', msUserSelect: 'none'};
+        let itemStyle = {
+            MozUserSelect: 'none',
+            WebkitUserSelect: 'none',
+            msUserSelect: 'none'
+        };
+        let delBtnStyle = {
+            display: this.state.showDelete ? 'block' : 'none'
+        };
 
         return (
             <div>
-                <ListItem onMouseEnter={this._showDeleteBtn} onMouseLeave={this._hideDeleteBtn.bind(this)} style={itemStyle} primaryText={this.props.data.text} leftCheckbox={<Checkbox/>} rightIconButton={<IconButton style={{display: this.state.showDelete ? 'block' : 'none'}} iconClassName="fa fa-times"/>}></ListItem>
-                <ListDivider  />
+              <ListItem onMouseEnter={ this._showDeleteBtn.bind(this) }
+                onMouseLeave={ this._hideDeleteBtn.bind(this) }
+                style={ itemStyle }
+                primaryText={ this.props.data.text }
+                leftCheckbox={ <Checkbox onCheck={ this._onCheckItem.bind(this) } /> }
+                rightIconButton={ <IconButton style={ delBtnStyle } iconClassName="fa fa-times" onClick={ this._onDeleteItem.bind(this) } /> }></ListItem>
+              <ListDivider />
             </div>
             );
     }
