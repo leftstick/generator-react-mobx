@@ -9,6 +9,7 @@ import Footer from './todo/components/Footer.jsx';
 import Panel from './todo/components/Panel.jsx';
 import TodoInput from './todo/components/TodoInput.jsx';
 import TodoList from './todo/components/TodoList.jsx';
+import StatusBar from './todo/components/StatusBar.jsx';
 
 let ThemeManager = new Mui.Styles.ThemeManager();
 
@@ -16,6 +17,7 @@ class Application extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {todoList: [], filter: 'all'};
     }
 
     getChildContext() {
@@ -29,13 +31,48 @@ class Application extends React.Component {
         ThemeManager.setTheme(ThemeManager.types.LIGHT);
     }
 
+    _onTodoAdded(todo) {
+        this.setState({
+            todoList: [
+                todo,
+                ...this.state.todoList
+            ]
+        });
+    }
+
+    _onTodoDeleted(id) {
+        this.setState({
+            todoList: this.state.todoList.filter((todo) => todo.id !== id)
+        });
+    }
+
+    _onTodoChanged(id, checked) {
+        this.setState({
+            todoList: this.state.todoList.map((todo) => {
+                var t = Object.create(todo);
+                if (todo.id === id) {
+                    todo.completed = checked;
+                }
+                return t;
+            })
+        });
+    }
+
+    _onChangeFilter(filter) {
+        this.setState({filter: filter});
+    }
+
     render() {
         return (
             <div>
               <Header/>
               <Panel>
-                <TodoInput />
-                <TodoList />
+                <TodoInput onTodoAdded={ this._onTodoAdded.bind(this) } />
+                <TodoList list={ this.state.todoList }
+                  filter={ this.state.filter }
+                  onTodoDeleted={ this._onTodoDeleted.bind(this) }
+                  onTodoChanged={ this._onTodoChanged.bind(this) } />
+                <StatusBar list={ this.state.todoList } filter={ this.state.filter } onChangeFilter={ this._onChangeFilter.bind(this) } />
               </Panel>
               <Footer/>
             </div>

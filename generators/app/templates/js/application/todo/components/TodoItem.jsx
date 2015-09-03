@@ -6,11 +6,19 @@ import Mui from 'material-ui';
 class TodoItem extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showDelete: true};
+        this.state = {
+            showDelete: false,
+            itemStyle: {
+                MozUserSelect: 'none',
+                WebkitUserSelect: 'none',
+                msUserSelect: 'none',
+                textDecoration: this.props.data.completed ? 'line-through' : 'none',
+                color: Mui.Styles.Colors.black
+            }
+        };
     }
 
     _showDeleteBtn(e) {
-        console.log(e)
         this.setState({showDelete: true});
     }
 
@@ -19,11 +27,26 @@ class TodoItem extends React.Component {
     }
 
     _onDeleteItem(e) {
-        console.log('delete ID', this.props.data.id);
+        if (typeof this.props.onDelete !== 'function') {
+            return;
+        }
+        this.props.onDelete(this.props.data.id);
     }
 
     _onCheckItem(e, checked) {
-        console.log('check ID', this.props.data.id, checked);
+        this.setState({
+            itemStyle: {
+                MozUserSelect: 'none',
+                WebkitUserSelect: 'none',
+                msUserSelect: 'none',
+                textDecoration: checked ? 'line-through' : 'none',
+                color: checked ? Mui.Styles.Colors.grey500 : Mui.Styles.Colors.black
+            }
+        });
+
+        if (typeof this.props.onChange === 'function') {
+            this.props.onChange(this.props.data.id, checked);
+        }
     }
 
     render() {
@@ -31,11 +54,7 @@ class TodoItem extends React.Component {
         let ListDivider = Mui.ListDivider;
         let Checkbox = Mui.Checkbox;
         let IconButton = Mui.IconButton;
-        let itemStyle = {
-            MozUserSelect: 'none',
-            WebkitUserSelect: 'none',
-            msUserSelect: 'none'
-        };
+
         let delBtnStyle = {
             display: this.state.showDelete ? 'block' : 'none'
         };
@@ -44,9 +63,9 @@ class TodoItem extends React.Component {
             <div>
               <ListItem onMouseEnter={ this._showDeleteBtn.bind(this) }
                 onMouseLeave={ this._hideDeleteBtn.bind(this) }
-                style={ itemStyle }
+                style={ this.state.itemStyle }
                 primaryText={ this.props.data.text }
-                leftCheckbox={ <Checkbox onCheck={ this._onCheckItem.bind(this) } /> }
+                leftIcon={ <Checkbox onCheck={ this._onCheckItem.bind(this) } defaultChecked={ this.props.data.completed } /> }
                 rightIconButton={ <IconButton style={ delBtnStyle } iconClassName="fa fa-times" onClick={ this._onDeleteItem.bind(this) } /> }></ListItem>
               <ListDivider />
             </div>

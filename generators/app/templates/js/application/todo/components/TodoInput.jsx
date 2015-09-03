@@ -1,17 +1,21 @@
 import React from 'react';
 import Mui from 'material-ui';
+import uuid from 'uuid';
 
 class TodoInput extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {txt: ''};
     }
 
     _onSubmit(e) {
-        if (e.keyCode !== 13) {
-            return;
+        if (typeof this.props.onTodoAdded === 'function') {
+            this.props.onTodoAdded({
+                id: uuid.v1(),
+                text: this.refs.text.getValue()
+            });
         }
-        console.log(e.target.value);
-        e.target.value = '';
+        this.refs.text.setValue('');
     }
 
     render() {
@@ -25,10 +29,11 @@ class TodoInput extends React.Component {
         return (
             <div>
               <TextField hintText="What needs to be done?"
+                ref="text"
                 fullWidth={ true }
                 style={ inputStyle }
                 underlineStyle={ underlineStyle }
-                onKeyUp={ this._onSubmit.bind(this) } />
+                onEnterKeyDown={ this._onSubmit.bind(this) } />
             </div>
             );
     }

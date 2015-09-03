@@ -7,18 +7,6 @@ import TodoItem from './TodoItem.jsx';
 class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            todos: [
-                {
-                    id: 's',
-                    text: 'nidayede'
-                },
-                {
-                    id: 'gh',
-                    text: '我是谁的老大爷呢'
-                }
-            ]
-        };
     }
 
     render() {
@@ -28,13 +16,26 @@ class TodoList extends React.Component {
         let _this = this;
         let listStyle = {
             paddingTop: '0',
-            display: this.state.todos.length ? 'block' : 'none'
+            display: this.props.list.length ? 'block' : 'none'
+        };
+
+        var filterHandler = (todo) => {
+            if (this.props.filter === 'all') {
+                return true;
+            }
+            if (this.props.filter === 'completed') {
+                return todo.completed;
+            }
+            return !todo.completed;
         };
 
         return (
             <List style={ listStyle }>
-              { this.state.todos.map(function(todo, index) {
-                    return <TodoItem key={ todo.id } data={ todo } isLast={ _this.state.todos.length - 1 === index } />;
+              { this.props.list.filter(filterHandler).map(function(todo, index) {
+                    return <TodoItem onDelete={ _this.props.onTodoDeleted }
+                             onChange={ _this.props.onTodoChanged }
+                             key={ todo.id }
+                             data={ todo } />;
                 }) }
             </List>
             );

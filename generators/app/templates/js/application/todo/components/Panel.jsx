@@ -3,6 +3,7 @@
 import React from 'react';
 import Mui from 'material-ui';
 import TodoInput from './TodoInput.jsx';
+import _ from 'lodash';
 
 class Panel extends React.Component {
 
@@ -51,7 +52,7 @@ class Panel extends React.Component {
         let Paper = Mui.Paper;
 
         return (
-            <Paper style={this.state.paperStyle} zDepth={this.state.zDepth} rounded={false}>
+            <Paper style={ this.state.paperStyle } zDepth={ this.state.zDepth } rounded={ false }>
               { this.props.children }
             </Paper>
             );
