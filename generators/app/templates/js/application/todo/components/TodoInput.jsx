@@ -1,15 +1,15 @@
 import React from 'react';
-import Mui from 'material-ui';
+import { TextField, Mixins } from 'material-ui';
 import uuid from 'uuid';
+import { isFunction, trim } from 'lodash';
 
 class TodoInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {txt: ''};
     }
 
     _onSubmit(e) {
-        if (typeof this.props.onTodoAdded === 'function') {
+        if (isFunction(this.props.onTodoAdded) && trim(this.refs.text.getValue())) {
             this.props.onTodoAdded({
                 id: uuid.v1(),
                 text: this.refs.text.getValue()
@@ -19,9 +19,9 @@ class TodoInput extends React.Component {
     }
 
     render() {
-        let TextField = Mui.TextField;
+        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
         let inputStyle = {
-            padding: '16px 16px 16px 60px',
+            padding: '16px 16px 11px 60px',
             boxSizing: 'border-box'
         };
         let underlineStyle = {marginLeft: '-60px', bottom: '0'};
@@ -31,12 +31,14 @@ class TodoInput extends React.Component {
               <TextField hintText="What needs to be done?"
                 ref="text"
                 fullWidth={ true }
-                style={ inputStyle }
-                underlineStyle={ underlineStyle }
+                style={ mergeAndPrefix(inputStyle) }
+                underlineStyle={ mergeAndPrefix(underlineStyle) }
                 onEnterKeyDown={ this._onSubmit.bind(this) } />
             </div>
             );
     }
 }
+
+TodoInput.propTypes = {onTodoAdded: React.PropTypes.func};
 
 export default TodoInput;

@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { Mixins } from 'material-ui';
 
 class Footer extends React.Component {
 
@@ -15,9 +16,10 @@ class Footer extends React.Component {
             textAlign: 'center',
             marginTop: '15px'
         };
+        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
         return (
-            <footer style={footerStyle}>
-              <span>{'\u00A9 2015 Howard.Zuo, All rights reserved.'}</span>
+            <footer style={ mergeAndPrefix(footerStyle) }>
+              <span>{ '\u00A9 2015 Howard.Zuo, All rights reserved.' }</span>
             </footer>
             );
     }

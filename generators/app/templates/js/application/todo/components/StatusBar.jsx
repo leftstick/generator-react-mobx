@@ -1,59 +1,29 @@
 import React from 'react';
-import Mui from 'material-ui';
+import UI from 'UI';
+import { RaisedButton, FlatButton, Mixins } from 'material-ui';
 
 class StatusBar extends React.Component {
     constructor(props) {
         super(props);
-        let countStyle = {
-            float: 'left',
-            marginLeft: '15px',
-            height: '36px',
-            lineHeight: '36px',
-            display: 'block'
-        };
-        let clearStyle = {
-            float: 'right',
-            marginRight: '15px',
-            display: this._getActiveTodos().length !== this.props.list.length ? 'block' : 'none'
-        };
         this.state = {
-            countStyle: countStyle,
-            clearStyle: clearStyle
+            countStyle: this._getCountStyle(),
+            clearStyle: this._getClearStyle(this.props)
         };
         this._onResize = _.debounce(this._onResize, 150).bind(this);
     }
 
-    _getActiveTodos() {
-        return this.props.list.filter((todo) => !todo.completed);
+    _getActiveTodos(props) {
+        return props.list.filter((todo) => !todo.completed);
     }
 
-    _getWindowWidth() {
-        let element = document.documentElement;
-        let body = document.getElementsByTagName('body')[0];
-        let width = window.innerWidth || element.clientWidth || body.clientWidth;
-        return width;
+    _getCompletedTodos(props) {
+        return props.list.filter((todo) => todo.completed);
     }
 
     _onResize(e) {
-        let countStyle = {
-            float: 'left',
-            marginLeft: '15px',
-            height: '36px',
-            lineHeight: '36px',
-            display: 'block'
-        };
-        let clearStyle = {
-            float: 'right',
-            marginRight: '15px',
-            display: this._getActiveTodos().length !== this.props.list.length ? 'block' : 'none'
-        };
-        if (this._getWindowWidth() <= 850) {
-            countStyle.display = 'none';
-            clearStyle.display = 'none';
-        }
         this.setState({
-            countStyle: countStyle,
-            clearStyle: clearStyle
+            countStyle: this._getCountStyle(),
+            clearStyle: this._getClearStyle(this.props)
         });
     }
 
@@ -65,13 +35,37 @@ class StatusBar extends React.Component {
         window.removeEventListener('resize', this._onResize, false);
     }
 
-    componentWillReceiveProps() {
-        let clearStyle = {
-            float: 'right',
-            marginRight: '15px',
-            display: this._getActiveTodos().length !== this.props.list.length ? 'block' : 'none'
+    _getCountStyle() {
+        let countStyle = {
+            position: 'absolute',
+            left: '15px',
+            height: '36px',
+            lineHeight: '36px',
+            display: 'block'
         };
-        this.setState({clearStyle: clearStyle});
+        if (UI.windowWidth() <= UI.BREAK_POINT) {
+            countStyle.display = 'none';
+        }
+        return countStyle;
+    }
+
+    _getClearStyle(props) {
+        let clearStyle = {
+            position: 'absolute',
+            right: '5px',
+            top: '0',
+            display: this._getCompletedTodos(props).length ? 'block' : 'none'
+        };
+        if (UI.windowWidth() <= UI.BREAK_POINT) {
+            clearStyle.display = 'none';
+        }
+        return clearStyle;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            clearStyle: this._getClearStyle(nextProps)
+        });
     }
 
     _changeFilter(filter, e) {
@@ -84,27 +78,40 @@ class StatusBar extends React.Component {
         this.props.onChangeFilter(filter);
     }
 
+    _cleanCompleted() {
+        if (typeof this.props.onCleanCompleted !== 'function') {
+            return;
+        }
+        this.props.onCleanCompleted();
+    }
+
     render() {
-        let RaisedButton = Mui.RaisedButton;
-        let FlatButton = Mui.FlatButton;
-        let leftLen = this._getActiveTodos().length;
+        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
+        let leftLen = this._getActiveTodos(this.props).length;
         let itemStr = leftLen > 1 ? 'items' : 'item';
         let barStyle = {
             display: this.props.list.length ? 'block' : 'none',
-            textAlign: 'center'
+            textAlign: 'center',
+            position: 'relative'
         };
 
         return (
-            <div style={ barStyle }>
-              <span style={ this.state.countStyle }>{ leftLen } { itemStr } left</span>
+            <div style={ mergeAndPrefix(barStyle) }>
+              <span style={ mergeAndPrefix(this.state.countStyle) }>{ leftLen } { itemStr } left</span>
               <RaisedButton label="All" secondary={ this.props.filter === 'all' } onClick={ this._changeFilter.bind(this, 'all') } />&nbsp;&nbsp;&nbsp;&nbsp;
               <RaisedButton label="Active" secondary={ this.props.filter === 'active' } onClick={ this._changeFilter.bind(this, 'active') } />&nbsp;&nbsp;&nbsp;&nbsp;
               <RaisedButton label="Completed" secondary={ this.props.filter === 'completed' } onClick={ this._changeFilter.bind(this, 'completed') } />
-              <FlatButton label="Clear completed" style={ this.state.clearStyle } />
-              <div style={ {clear: 'both'} }></div>
+              <FlatButton label="Clear completed" style={ mergeAndPrefix(this.state.clearStyle) } onClick={ this._cleanCompleted.bind(this) } />
             </div>
             );
     }
 }
+
+StatusBar.propTypes = {
+    list: React.PropTypes.array,
+    onChangeFilter: React.PropTypes.func,
+    onCleanCompleted: React.PropTypes.func,
+    filter: React.PropTypes.string
+};
 
 export default StatusBar;

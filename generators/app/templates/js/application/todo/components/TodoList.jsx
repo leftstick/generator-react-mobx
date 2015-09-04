@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Mui from 'material-ui';
+import { List, ListItem, Checkbox } from 'material-ui';
 import TodoItem from './TodoItem.jsx';
 
 class TodoList extends React.Component {
@@ -10,9 +10,6 @@ class TodoList extends React.Component {
     }
 
     render() {
-        let List = Mui.List;
-        let ListItem = Mui.ListItem;
-        let Checkbox = Mui.Checkbox;
         let _this = this;
         let listStyle = {
             paddingTop: '0',
@@ -31,7 +28,7 @@ class TodoList extends React.Component {
 
         return (
             <List style={ listStyle }>
-              { this.props.list.filter(filterHandler).map(function(todo, index) {
+              { this.props.list.filter(filterHandler).map(function(todo) {
                     return <TodoItem onDelete={ _this.props.onTodoDeleted }
                              onChange={ _this.props.onTodoChanged }
                              key={ todo.id }
@@ -41,5 +38,12 @@ class TodoList extends React.Component {
             );
     }
 }
+
+TodoList.propTypes = {
+    list: React.PropTypes.array,
+    filter: React.PropTypes.string,
+    onTodoDeleted: React.PropTypes.func,
+    onTodoChanged: React.PropTypes.func
+};
 
 export default TodoList;

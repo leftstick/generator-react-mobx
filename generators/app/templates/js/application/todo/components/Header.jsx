@@ -1,16 +1,16 @@
 'use strict';
 
 import React from 'react';
-import Mui from 'material-ui';
+import { AppBar, IconButton } from 'material-ui';
 import event from 'Event';
 import _ from 'lodash';
+import UI from 'UI';
 
 class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        let zDepth = 1;
-        this.state = {zDepth};
+        this.state = {zDepth: 1};
         this._onResize = _.debounce(this._onResize, 150).bind(this);
     }
 
@@ -24,19 +24,10 @@ class Header extends React.Component {
         event.stop(e);
     }
 
-    _getWindowWidth() {
-        let element = document.documentElement;
-        let body = document.getElementsByTagName('body')[0];
-        let width = window.innerWidth || element.clientWidth || body.clientWidth;
-        return width;
-    }
-
     _onResize(e) {
-        let zDepth = 1;
-        if (this._getWindowWidth() <= 850) {
-            zDepth = 0;
-        }
-        this.setState({zDepth});
+        this.setState({
+            zDepth: UI.windowWidth() <= UI.BREAK_POINT ? 0 : 1
+        });
     }
 
     componentWillMount() {
@@ -48,8 +39,6 @@ class Header extends React.Component {
     }
 
     render() {
-        let AppBar = Mui.AppBar;
-        let IconButton = Mui.IconButton;
         return (
             <AppBar title="todos"
               iconClassNameLeft="fa fa-html5"

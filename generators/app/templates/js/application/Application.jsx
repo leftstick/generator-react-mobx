@@ -1,8 +1,8 @@
 'use strict';
 
-import _ from 'lodash';
+import { isFunction } from 'lodash';
 import React from 'react';
-import Mui from 'material-ui';
+import { Styles } from 'material-ui';
 
 import Header from './todo/components/Header.jsx';
 import Footer from './todo/components/Footer.jsx';
@@ -11,7 +11,7 @@ import TodoInput from './todo/components/TodoInput.jsx';
 import TodoList from './todo/components/TodoList.jsx';
 import StatusBar from './todo/components/StatusBar.jsx';
 
-let ThemeManager = new Mui.Styles.ThemeManager();
+let ThemeManager = new Styles.ThemeManager();
 
 class Application extends React.Component {
 
@@ -25,7 +25,7 @@ class Application extends React.Component {
     }
 
     componentWillMount() {
-        if (_.isFunction(this.props.onLoad)) {
+        if (isFunction(this.props.onLoad)) {
             this.props.onLoad();
         }
         ThemeManager.setTheme(ThemeManager.types.LIGHT);
@@ -46,20 +46,24 @@ class Application extends React.Component {
         });
     }
 
-    _onTodoChanged(id, checked) {
-        this.setState({
-            todoList: this.state.todoList.map((todo) => {
-                var t = Object.create(todo);
-                if (todo.id === id) {
-                    todo.completed = checked;
-                }
-                return t;
-            })
+    _onTodoChanged(newTodo) {
+        let newList = this.state.todoList.map((todo) => {
+            if (todo.id === newTodo.id) {
+                return newTodo;
+            }
+            return todo;
         });
+        this.setState({todoList: newList});
     }
 
     _onChangeFilter(filter) {
         this.setState({filter: filter});
+    }
+
+    _cleanCompleted() {
+        this.setState({
+            todoList: this.state.todoList.filter((todo) => !todo.completed)
+        });
     }
 
     render() {
@@ -72,7 +76,10 @@ class Application extends React.Component {
                   filter={ this.state.filter }
                   onTodoDeleted={ this._onTodoDeleted.bind(this) }
                   onTodoChanged={ this._onTodoChanged.bind(this) } />
-                <StatusBar list={ this.state.todoList } filter={ this.state.filter } onChangeFilter={ this._onChangeFilter.bind(this) } />
+                <StatusBar onCleanCompleted={ this._cleanCompleted.bind(this) }
+                  list={ this.state.todoList }
+                  filter={ this.state.filter }
+                  onChangeFilter={ this._onChangeFilter.bind(this) } />
               </Panel>
               <Footer/>
             </div>

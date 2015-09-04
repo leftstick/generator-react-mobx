@@ -1,43 +1,45 @@
 'use strict';
 
 import React from 'react';
-import Mui from 'material-ui';
-import TodoInput from './TodoInput.jsx';
+import { Paper, Mixins } from 'material-ui';
 import _ from 'lodash';
+import UI from 'UI';
 
 class Panel extends React.Component {
 
     constructor(props) {
         super(props);
-        let paperStyle = {
-            minHeight: '350px',
-            width: '850px',
-            margin: '5px auto 0 auto',
-            backgroundColor: '#fff'
+        this.state = {
+            paperStyle: this._getPaperStyle(),
+            zDepth: this._getZDepth()
         };
-
-        let zDepth = 1;
-        this.state = {paperStyle, zDepth};
         this._onResize = _.debounce(this._onResize, 150).bind(this);
     }
 
-    _getWindowWidth() {
-        let element = document.documentElement;
-        let body = document.getElementsByTagName('body')[0];
-        let width = window.innerWidth || element.clientWidth || body.clientWidth;
-        return width;
+    _getPaperStyle() {
+        let style = {
+            minHeight: '350px',
+            margin: '5px auto 0 auto',
+            paddingBottom: '10px',
+            backgroundColor: '#fff'
+        };
+        if (UI.windowWidth() <= UI.BREAK_POINT) {
+            style.width = '100%';
+        } else {
+            style.width = UI.BREAK_POINT + 'px';
+        }
+        return style;
+    }
+
+    _getZDepth() {
+        return UI.windowWidth() <= UI.BREAK_POINT ? 0 : 1;
     }
 
     _onResize(e) {
-        let originalStyle = this.state.paperStyle;
-        let zDepth = 1;
-        if (this._getWindowWidth() <= 850) {
-            originalStyle.width = '100%';
-            zDepth = 0;
-        } else {
-            originalStyle.width = '850px';
-        }
-        this.setState({paperStyle: originalStyle, zDepth: zDepth});
+        this.setState({
+            paperStyle: this._getPaperStyle(),
+            zDepth: this._getZDepth()
+        });
     }
 
     componentWillMount() {
@@ -49,14 +51,15 @@ class Panel extends React.Component {
     }
 
     render() {
-        let Paper = Mui.Paper;
-
+        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
         return (
-            <Paper style={ this.state.paperStyle } zDepth={ this.state.zDepth } rounded={ false }>
+            <Paper style={ mergeAndPrefix(this.state.paperStyle) } zDepth={ this.state.zDepth } rounded={ false }>
               { this.props.children }
             </Paper>
             );
     }
 }
+
+Panel.propTypes = {children: React.PropTypes.array};
 
 export default Panel;

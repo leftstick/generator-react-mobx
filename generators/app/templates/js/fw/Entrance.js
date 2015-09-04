@@ -25,7 +25,7 @@ class Entrance {
     }
 
     launch() {
-        React.render(<Application onLoad={this._destroySplash}/>, document.body);
+        React.render(<Application onLoad={ this._destroySplash } />, document.body);
     }
 
     run() {
