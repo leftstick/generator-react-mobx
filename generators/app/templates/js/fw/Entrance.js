@@ -3,7 +3,6 @@
 import Splash from 'splash-screen';
 import React from 'react';
 import Application from 'js/application/Application.jsx';
-import 'react-fastclick';
 
 class Entrance {
 
