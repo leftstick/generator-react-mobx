@@ -96,9 +96,10 @@ var gen = generators.Base.extend({
             })(self.obj);
         });
         self.directory(self.templatePath('less'), self.destinationPath('less'));
-        self.copy(self.templatePath('favicon.ico'), self.destinationPath('favicon.ico'));
+        self.directory(self.templatePath('img'), self.destinationPath('img'));
         self.copy(self.templatePath('gitignore'), self.destinationPath('.gitignore'));
         self.copy(self.templatePath('gulpfile.js'), self.destinationPath('gulpfile.js'));
+        self.fs.copyTpl(self.templatePath('index.html'), self.destinationPath('index.html'), self.obj);
         self.copy(self.templatePath('index.html'), self.destinationPath('index.html'));
         self.fs.copyTpl(self.templatePath('package.json_vm'), self.destinationPath('package.json'), self.obj);
         self.copy(self.templatePath('webpack.config.js'), self.destinationPath('webpack.config.js'));

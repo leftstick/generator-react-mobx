@@ -1,6 +1,5 @@
 'use strict';
 
-import { isFunction } from 'lodash';
 import React from 'react';
 import { Styles } from 'material-ui';
 
@@ -25,9 +24,6 @@ class Application extends React.Component {
     }
 
     componentWillMount() {
-        if (isFunction(this.props.onLoad)) {
-            this.props.onLoad();
-        }
         ThemeManager.setTheme(ThemeManager.types.LIGHT);
     }
 
