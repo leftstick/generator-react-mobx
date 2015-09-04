@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { isFunction } from 'lodash';
 import { Styles } from 'material-ui';
 
 import Header from './todo/components/Header.jsx';
@@ -24,6 +25,9 @@ class Application extends React.Component {
     }
 
     componentWillMount() {
+        if (isFunction(this.props.onLoad)) {
+            this.props.onLoad();
+        }
         ThemeManager.setTheme(ThemeManager.types.LIGHT);
     }
 
@@ -86,5 +90,8 @@ class Application extends React.Component {
 Application.childContextTypes = {
     muiTheme: React.PropTypes.object
 };
+
+Application.propTypes = {onLoad: React.PropTypes.func};
+
 
 export default Application;

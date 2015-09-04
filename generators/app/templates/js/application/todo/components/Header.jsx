@@ -15,6 +15,7 @@ class Header extends React.Component {
     }
 
     _onRightClick(e) {
+        console.log(e)
         window.location.href = 'https://github.com/leftstick/generator-material-react';
         event.stop(e);
     }
@@ -42,9 +43,8 @@ class Header extends React.Component {
         return (
             <AppBar title="todos"
               iconClassNameLeft="fa fa-html5"
-              iconElementRight={ <IconButton iconClassName="fa fa-github-alt" tooltip="View Source" /> }
-              onLeftIconButtonTouchTap={ this._onLeftClick }
-              onRightIconButtonTouchTap={ this._onRightClick }
+              iconElementRight={ <IconButton iconClassName="fa fa-github-alt" onClick={ this._onRightClick.bind(this) } tooltip="View Source" /> }
+              onLeftIconButtonTouchTap={ this._onLeftClick.bind(this) }
               zDepth={ this.state.zDepth } />
             );
     }

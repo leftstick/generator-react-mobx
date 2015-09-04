@@ -12,6 +12,7 @@ class Entrance {
     }
 
     beforeStart() {
+        React.initializeTouchEvents(true);
         let injectTapEventPlugin = require('react-tap-event-plugin');
         //Needed for onTouchTap
         //Can go away when react 1.0 release
@@ -21,16 +22,21 @@ class Entrance {
     }
 
     _destroySplash() {
+        let _this = this;
         Splash.destroy();
+        setTimeout(function() {
+            if (Splash.isRunning()) {
+                _this._destroySplash.bind(_this)();
+            }
+        }, 50);
     }
 
     launch() {
-        React.render(<Application />, document.body);
+        React.render(<Application onLoad={ this._destroySplash.bind(this) } />, document.body);
     }
 
     run() {
         this.beforeStart();
-        this._destroySplash();
         this.launch();
     }
 
