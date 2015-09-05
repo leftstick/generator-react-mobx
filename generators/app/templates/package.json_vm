@@ -22,7 +22,7 @@
     "react": "0.13.3",
     "material-ui": "0.11.0",
     "uuid": "2.0.1",
-    "splash-screen": "2.2.0"
+    "splash-screen": "2.2.1"
   },
   "devDependencies": {
     "babel-core": "^5.8.23",

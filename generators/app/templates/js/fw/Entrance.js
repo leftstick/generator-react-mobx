@@ -28,15 +28,16 @@ class Entrance {
             if (Splash.isRunning()) {
                 _this._destroySplash.bind(_this)();
             }
-        }, 50);
+        }, 100);
     }
 
     launch() {
-        React.render(<Application onLoad={ this._destroySplash.bind(this) } />, document.body);
+        React.render(<Application />, document.body);
     }
 
     run() {
         this.beforeStart();
+        this._destroySplash();
         this.launch();
     }
 
