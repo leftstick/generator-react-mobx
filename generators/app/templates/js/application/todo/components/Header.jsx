@@ -10,12 +10,13 @@ class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {zDepth: 1};
+        this.state = {
+            zDepth: UI.windowWidth() <= UI.BREAK_POINT ? 0 : 1
+        };
         this._onResize = _.debounce(this._onResize, 150).bind(this);
     }
 
     _onRightClick(e) {
-        console.log(e)
         window.location.href = 'https://github.com/leftstick/generator-material-react';
         event.stop(e);
     }
