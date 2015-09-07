@@ -22,7 +22,7 @@ class Header extends React.Component {
     }
 
     _onLeftClick(e) {
-        window.location.href = '/';
+        window.location.href = 'http://leftstick.gitcafe.io/';
         event.stop(e);
     }
 
