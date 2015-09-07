@@ -8,11 +8,10 @@ gulp.task('release', function(callback) {
     var path = require('path');
     var replace = require('gulp-replace');
     var config = require('./webpack.config');
-    var myConfig = Object.create(config);
 
     require('rimraf').sync('build/');
 
-    myConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
         }
@@ -21,7 +20,7 @@ gulp.task('release', function(callback) {
     gulp.src(['img/*', 'favicon.ico'], {'base': '.'})
         .pipe(gulp.dest('build/'));
 
-    webpack(myConfig, function(err, stats) {
+    webpack(config, function(err, stats) {
         if (err) {
             throw new gutil.PluginError('webpack', err);
         }
@@ -38,16 +37,15 @@ gulp.task('release', function(callback) {
 gulp.task('dev', function(callback) {
     var WebpackDevServer = require('webpack-dev-server');
     var config = require('./webpack.config');
-    var myConfig = Object.create(config);
-    myConfig.devtool = 'sourcemap';
-    myConfig.debug = true;
-    myConfig.output.filename = myConfig.output.filename.replace(/\[hash\]\./, '');
-    myConfig.output.chunkFilename = myConfig.output.chunkFilename.replace(/\[hash\]\./, '');
+    config.devtool = 'sourcemap';
+    config.debug = true;
+    config.output.filename = config.output.filename.replace(/\[hash\]\./, '');
+    config.output.chunkFilename = config.output.chunkFilename.replace(/\[hash\]\./, '');
 
-    myConfig.plugins.pop();
-    myConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin('common.bundle.js'));
+    config.plugins.pop();
+    config.plugins.push(new webpack.optimize.CommonsChunkPlugin('common.bundle.js'));
 
-    new WebpackDevServer(webpack(myConfig), {
+    new WebpackDevServer(webpack(config), {
         historyApiFallback: true,
         publicPath: '/js/'
     }).listen(8080, 'localhost', function(err) {
