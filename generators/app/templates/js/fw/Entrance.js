@@ -1,5 +1,10 @@
-'use strict';
-
+/**
+ *  Entrance.js launch the application.
+ *
+ *  @author  <%= answers.username %>
+ *  @date    <%= answers.date %>
+ *
+ */
 import Splash from 'splash-screen';
 import React from 'react';
 import Application from 'js/application/Application.jsx';
@@ -22,11 +27,10 @@ class Entrance {
 
     _destroySplash() {
         let _this = this;
-        let destroy = Splash.destroy;
-        destroy();
+        Splash.destroy();
         setTimeout(function() {
             if (Splash.isRunning()) {
-                destroy();
+                _this.destroySplash();
             }
         }, 100);
     }

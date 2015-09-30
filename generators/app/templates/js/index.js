@@ -1,12 +1,10 @@
 /**
- *  index.js launch the application.
+ *  index.js, the starter.
  *
  *  @author  <%= answers.username %>
  *  @date    <%= answers.date %>
  *
  */
-'use strict';
-
 require.ensure([], function() {
     require('splash-screen/splash.min.css');
     require('splash-screen').enable('circular');
