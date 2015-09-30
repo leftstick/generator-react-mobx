@@ -65,7 +65,6 @@ Open [http://localhost:8080](http://localhost:8080) to watch the released versio
 4. [es6-features](https://github.com/lukehoban/es6features)
 5. [react](http://facebook.github.io/react/)
 6. [material-ui](http://material-ui.com)
-7. [fontawesome](http://fontawesome.io/)
 
 
 ## LICENSE ##

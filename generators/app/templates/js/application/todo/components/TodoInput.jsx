@@ -1,5 +1,8 @@
+'use strict';
+
 import React from 'react';
-import { TextField, Mixins } from 'material-ui';
+import TextField from 'material-ui/lib/text-field';
+import StylePropable from 'material-ui/lib/mixins/style-propable';
 import uuid from 'uuid';
 import { isFunction, trim } from 'lodash';
 
@@ -19,7 +22,7 @@ class TodoInput extends React.Component {
     }
 
     render() {
-        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
+        let mergeAndPrefix = StylePropable.mergeAndPrefix;
         let inputStyle = {
             padding: '16px 16px 11px 60px',
             boxSizing: 'border-box'

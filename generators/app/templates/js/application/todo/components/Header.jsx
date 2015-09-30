@@ -1,7 +1,8 @@
 'use strict';
 
 import React from 'react';
-import { AppBar, IconButton } from 'material-ui';
+import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
 import event from 'Event';
 import _ from 'lodash';
 import UI from 'UI';
@@ -43,8 +44,8 @@ class Header extends React.Component {
     render() {
         return (
             <AppBar title="todos"
-              iconClassNameLeft="fa fa-html5"
-              iconElementRight={ <IconButton iconClassName="fa fa-github-alt" onClick={ this._onRightClick.bind(this) } tooltip="View Source" /> }
+              iconClassNameLeft="icon-html5"
+              iconElementRight={ <IconButton iconClassName="icon-github-1" onClick={ this._onRightClick.bind(this) } tooltip="View Source" /> }
               onLeftIconButtonTouchTap={ this._onLeftClick.bind(this) }
               zDepth={ this.state.zDepth } />
             );

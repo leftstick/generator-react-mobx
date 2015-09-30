@@ -99,7 +99,7 @@ class TodoItem extends React.Component {
                 style={ mergeAndPrefix(this.state.itemStyle) }
                 primaryText={ this.props.data.text }
                 leftIcon={ <Checkbox onCheck={ this._onCheckItem.bind(this) } defaultChecked={ this.props.data.completed } /> }
-                rightIconButton={ <IconButton style={ mergeAndPrefix(delBtnStyle) } iconClassName="fa fa-times" onClick={ this._onDeleteItem.bind(this) } /> }
+                rightIconButton={ <IconButton style={ mergeAndPrefix(delBtnStyle) } iconClassName="icon-cancel" onClick={ this._onDeleteItem.bind(this) } /> }
                 onDoubleClick={ this._runInEdit.bind(this) }></ListItem>
               <TextField ref="txt"
                 style={ mergeAndPrefix(this.state.txtStyle) }

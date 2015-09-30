@@ -97,6 +97,7 @@ var gen = generators.Base.extend({
         });
         self.directory(self.templatePath('less'), self.destinationPath('less'));
         self.directory(self.templatePath('img'), self.destinationPath('img'));
+        self.directory(self.templatePath('font'), self.destinationPath('font'));
         self.copy(self.templatePath('gitignore'), self.destinationPath('.gitignore'));
         self.copy(self.templatePath('gulpfile.js'), self.destinationPath('gulpfile.js'));
         self.fs.copyTpl(self.templatePath('index.html'), self.destinationPath('index.html'), self.obj);

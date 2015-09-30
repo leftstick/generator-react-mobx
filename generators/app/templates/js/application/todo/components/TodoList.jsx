@@ -1,7 +1,9 @@
 'use strict';
 
 import React from 'react';
-import { List, ListItem, Checkbox } from 'material-ui';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import Checkbox from 'material-ui/lib/checkbox';
 import TodoItem from './TodoItem.jsx';
 
 class TodoList extends React.Component {

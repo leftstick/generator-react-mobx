@@ -7,7 +7,6 @@ import Application from 'js/application/Application.jsx';
 class Entrance {
 
     constructor() {
-        require('font-awesome/css/font-awesome.css');
         require('less/main.less');
     }
 
@@ -23,10 +22,11 @@ class Entrance {
 
     _destroySplash() {
         let _this = this;
-        Splash.destroy();
+        let destroy = Splash.destroy;
+        destroy();
         setTimeout(function() {
             if (Splash.isRunning()) {
-                _this._destroySplash.bind(_this)();
+                destroy();
             }
         }, 100);
     }

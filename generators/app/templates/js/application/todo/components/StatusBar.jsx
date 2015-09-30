@@ -1,6 +1,10 @@
+'use strict';
+
 import React from 'react';
 import UI from 'UI';
-import { RaisedButton, FlatButton, Mixins } from 'material-ui';
+import RaisedButton from 'material-ui/lib/raised-button';
+import FlatButton from 'material-ui/lib/flat-button';
+import StylePropable from 'material-ui/lib/mixins/style-propable';
 
 class StatusBar extends React.Component {
     constructor(props) {
@@ -86,7 +90,7 @@ class StatusBar extends React.Component {
     }
 
     render() {
-        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
+        let mergeAndPrefix = StylePropable.mergeAndPrefix;
         let leftLen = this._getActiveTodos(this.props).length;
         let itemStr = leftLen > 1 ? 'items' : 'item';
         let barStyle = {

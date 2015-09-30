@@ -11,13 +11,7 @@ gulp.task('release', function(callback) {
 
     require('rimraf').sync('build/');
 
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-        compress: {
-            warnings: false
-        }
-    }));
-
-    gulp.src(['img/*', 'favicon.ico'], {'base': '.'})
+    gulp.src(['img/*', 'font/*'], {'base': '.'})
         .pipe(gulp.dest('build/'));
 
     webpack(config, function(err, stats) {

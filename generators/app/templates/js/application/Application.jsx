@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { isFunction } from 'lodash';
-import { Styles } from 'material-ui';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import lightTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
 
 import Header from './todo/components/Header.jsx';
 import Footer from './todo/components/Footer.jsx';
@@ -11,7 +12,6 @@ import TodoInput from './todo/components/TodoInput.jsx';
 import TodoList from './todo/components/TodoList.jsx';
 import StatusBar from './todo/components/StatusBar.jsx';
 
-let ThemeManager = new Styles.ThemeManager();
 
 class Application extends React.Component {
 
@@ -21,11 +21,7 @@ class Application extends React.Component {
     }
 
     getChildContext() {
-        return {muiTheme: ThemeManager.getCurrentTheme()};
-    }
-
-    componentWillMount() {
-        ThemeManager.setTheme(ThemeManager.types.LIGHT);
+        return {muiTheme: ThemeManager.getMuiTheme(lightTheme)};
     }
 
     _onTodoAdded(todo) {
