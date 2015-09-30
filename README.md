@@ -13,6 +13,8 @@ Yeoman generator for React Material-UI with webpack
 2. Install [gulp](http://gulpjs.com/): `npm install -g gulp`
 3. Install __this__: `npm install -g generator-material-react`
 
+> prepend with `sudo` if you are running on `*nix` OS.
+
 ## Use `generator-material-react` ##
 
 `yo material-react`
