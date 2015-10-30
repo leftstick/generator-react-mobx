@@ -7,13 +7,12 @@
  */
 import Splash from 'splash-screen';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Application from 'js/application/Application.jsx';
 
 class Entrance {
 
-    constructor() {
-        require('less/main.less');
-    }
+    constructor() {}
 
     beforeStart() {
         React.initializeTouchEvents(true);
@@ -28,6 +27,7 @@ class Entrance {
     _destroySplash() {
         let _this = this;
         Splash.destroy();
+        require('splash-screen/splash.min.css').unuse();
         setTimeout(function() {
             if (Splash.isRunning()) {
                 _this.destroySplash();
@@ -36,7 +36,7 @@ class Entrance {
     }
 
     launch() {
-        React.render(<Application />, document.body);
+        ReactDOM.render(<Application />, document.body);
     }
 
     run() {
