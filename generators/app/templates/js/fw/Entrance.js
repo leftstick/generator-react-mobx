@@ -5,6 +5,7 @@
  *  @date    <%= answers.date %>
  *
  */
+'use strict';
 import Splash from 'splash-screen';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -15,7 +16,6 @@ class Entrance {
     constructor() {}
 
     beforeStart() {
-        React.initializeTouchEvents(true);
         let injectTapEventPlugin = require('react-tap-event-plugin');
         //Needed for onTouchTap
         //Can go away when react 1.0 release
@@ -36,7 +36,7 @@ class Entrance {
     }
 
     launch() {
-        ReactDOM.render(<Application />, document.body);
+        ReactDOM.render(<Application />, document.querySelector('#view'));
     }
 
     run() {

@@ -20,6 +20,6 @@ require.ensure([
 
     require('less/main.less');
 
-    var Entrance = require('./fw/Entrance');
+    var Entrance = require('./fw/Entrance').default;
     (new Entrance()).run();
 });

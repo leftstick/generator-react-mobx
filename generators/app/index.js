@@ -103,7 +103,8 @@ var gen = generators.Base.extend({
         self.fs.copyTpl(self.templatePath('index.html'), self.destinationPath('index.html'), self.obj);
         self.copy(self.templatePath('index.html'), self.destinationPath('index.html'));
         self.fs.copyTpl(self.templatePath('package.json_vm'), self.destinationPath('package.json'), self.obj);
-        self.copy(self.templatePath('webpack.config.js'), self.destinationPath('webpack.config.js'));
+        self.copy(self.templatePath('webpack.dev.config.js'), self.destinationPath('webpack.dev.config.js'));
+        self.copy(self.templatePath('webpack.prod.config.js'), self.destinationPath('webpack.prod.config.js'));
     },
     install: function() {
         this.npmInstall(undefined, {
