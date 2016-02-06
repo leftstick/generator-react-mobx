@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import { ListItem, ListDivider, TextField, Checkbox, IconButton, Styles, Mixins } from 'material-ui';
+import { ListItem, Divider, TextField, Checkbox, IconButton, Styles, Mixins } from 'material-ui';
 import { isFunction, clone, trim } from 'lodash';
 
 class TodoItem extends React.Component {
@@ -85,7 +85,7 @@ class TodoItem extends React.Component {
     }
 
     render() {
-        let mergeAndPrefix = Mixins.StylePropable.mergeAndPrefix;
+        let mergeStyles = Mixins.StylePropable.mergeStyles;
 
         let delBtnStyle = {
             display: this.state.showDelete ? 'block' : 'none'
@@ -96,19 +96,19 @@ class TodoItem extends React.Component {
             <div>
               <ListItem onMouseEnter={ this._showDeleteBtn.bind(this) }
                 onMouseLeave={ this._hideDeleteBtn.bind(this) }
-                style={ mergeAndPrefix(this.state.itemStyle) }
+                style={ mergeStyles(this.state.itemStyle) }
                 primaryText={ this.props.data.text }
                 leftIcon={ <Checkbox onCheck={ this._onCheckItem.bind(this) } defaultChecked={ this.props.data.completed } /> }
-                rightIconButton={ <IconButton style={ mergeAndPrefix(delBtnStyle) } iconClassName="icon-cancel" onClick={ this._onDeleteItem.bind(this) } /> }
+                rightIconButton={ <IconButton style={ mergeStyles(delBtnStyle) } iconClassName="icon-cancel" onClick={ this._onDeleteItem.bind(this) } /> }
                 onDoubleClick={ this._runInEdit.bind(this) }></ListItem>
               <TextField ref="txt"
-                style={ mergeAndPrefix(this.state.txtStyle) }
-                underlineStyle={ mergeAndPrefix(underlineStyle) }
+                style={ mergeStyles(this.state.txtStyle) }
+                underlineStyle={ mergeStyles(underlineStyle) }
                 fullWidth={ true }
                 defaultValue={ this.props.data.text }
                 onBlur={ this._saveEdit.bind(this) }
                 onEnterKeyDown={ this._saveEdit.bind(this) }></TextField>
-              <ListDivider />
+              <Divider />
             </div>
             );
     }

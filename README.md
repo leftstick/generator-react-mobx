@@ -2,6 +2,8 @@
 ==================
 [![NPM version][npm-image]][npm-url]
 ![][david-url]
+![][dt-url]
+![][license-url]
 
 Yeoman generator for React Material-UI with webpack
 
@@ -77,3 +79,5 @@ Open [http://localhost:8080](http://localhost:8080) to watch the released versio
 [npm-url]: https://npmjs.org/package/generator-material-react
 [npm-image]: https://badge.fury.io/js/generator-material-react.png
 [david-url]: https://david-dm.org/leftstick/generator-material-react.png
+[dt-url]:https://img.shields.io/npm/dt/generator-material-react.svg
+[license-url]:https://img.shields.io/npm/l/generator-material-react.svg

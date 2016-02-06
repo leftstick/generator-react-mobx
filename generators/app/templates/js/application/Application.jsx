@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import { isFunction } from 'lodash';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import lightTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
 

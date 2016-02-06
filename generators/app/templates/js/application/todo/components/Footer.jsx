@@ -16,10 +16,10 @@ class Footer extends React.Component {
             textAlign: 'center',
             marginTop: '15px'
         };
-        let mergeAndPrefix = StylePropable.mergeAndPrefix;
+        let mergeStyles = StylePropable.mergeStyles;
         return (
-            <footer style={ mergeAndPrefix(footerStyle) }>
-              <span>{ '\u00A9 2015 Howard.Zuo, All rights reserved.' }</span>
+            <footer style={ mergeStyles(footerStyle) }>
+              <span>{ '\u00A9 2016 Howard.Zuo, All rights reserved.' }</span>
             </footer>
             );
     }

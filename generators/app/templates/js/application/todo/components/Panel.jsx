@@ -52,9 +52,9 @@ class Panel extends React.Component {
     }
 
     render() {
-        let mergeAndPrefix = StylePropable.mergeAndPrefix;
+        let mergeStyles = StylePropable.mergeStyles;
         return (
-            <Paper style={ mergeAndPrefix(this.state.paperStyle) } zDepth={ this.state.zDepth } rounded={ false }>
+            <Paper style={ mergeStyles(this.state.paperStyle) } zDepth={ this.state.zDepth } rounded={ false }>
               { this.props.children }
             </Paper>
             );

@@ -2,6 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: {
@@ -17,11 +18,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: 'style/useable!css!autoprefixer?browsers=last 5 version!'
+                loader: 'style/useable!css!postcss!'
             },
             {
                 test: /\.less$/,
-                loader: 'style!css!autoprefixer?browsers=last 5 version!less!'
+                loader: 'style!css!postcss!less!'
             },
             {
                 test: /\.(js|jsx)$/,
@@ -39,6 +40,11 @@ module.exports = {
                 loader: 'file'
             }
         ]
+    },
+    postcss: function() {
+        return [
+            autoprefixer({browsers: ['last 5 versions']})
+        ];
     },
     resolve: {
         root: [

@@ -90,7 +90,7 @@ class StatusBar extends React.Component {
     }
 
     render() {
-        let mergeAndPrefix = StylePropable.mergeAndPrefix;
+        let {mergeStyles} = StylePropable;
         let leftLen = this._getActiveTodos(this.props).length;
         let itemStr = leftLen > 1 ? 'items' : 'item';
         let barStyle = {
@@ -100,12 +100,12 @@ class StatusBar extends React.Component {
         };
 
         return (
-            <div style={ mergeAndPrefix(barStyle) }>
-              <span style={ mergeAndPrefix(this.state.countStyle) }>{ leftLen } { itemStr } left</span>
+            <div style={ mergeStyles(barStyle) }>
+              <span style={ mergeStyles(this.state.countStyle) }>{ leftLen } { itemStr } left</span>
               <RaisedButton label="All" secondary={ this.props.filter === 'all' } onClick={ this._changeFilter.bind(this, 'all') } />&nbsp;&nbsp;&nbsp;&nbsp;
               <RaisedButton label="Active" secondary={ this.props.filter === 'active' } onClick={ this._changeFilter.bind(this, 'active') } />&nbsp;&nbsp;&nbsp;&nbsp;
               <RaisedButton label="Completed" secondary={ this.props.filter === 'completed' } onClick={ this._changeFilter.bind(this, 'completed') } />
-              <FlatButton label="Clear completed" style={ mergeAndPrefix(this.state.clearStyle) } onClick={ this._cleanCompleted.bind(this) } />
+              <FlatButton label="Clear completed" style={ mergeStyles(this.state.clearStyle) } onClick={ this._cleanCompleted.bind(this) } />
             </div>
             );
     }
