@@ -32,7 +32,7 @@ class TodoInput extends React.Component {
             padding: '16px 16px 11px 60px',
             boxSizing: 'border-box'
         };
-        let underlineStyle = {marginLeft: '-60px', bottom: '0'};
+        let underlineStyle = {marginLeft: '-60px', bottom: '0px'};
 
         return (
             <div>

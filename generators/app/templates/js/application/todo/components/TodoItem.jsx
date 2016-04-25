@@ -90,7 +90,7 @@ class TodoItem extends React.Component {
         let delBtnStyle = {
             display: this.state.showDelete ? 'block' : 'none'
         };
-        let underlineStyle = {marginLeft: '-60px', bottom: '0'};
+        let underlineStyle = {marginLeft: '-60px', bottom: '0px'};
 
         return (
             <div>

@@ -14,7 +14,7 @@ class TodoList extends React.Component {
     render() {
         let _this = this;
         let listStyle = {
-            paddingTop: '0',
+            paddingTop: '0px',
             display: this.props.list.length ? 'block' : 'none'
         };
 

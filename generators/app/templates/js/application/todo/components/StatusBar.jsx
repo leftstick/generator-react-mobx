@@ -57,7 +57,7 @@ class StatusBar extends React.Component {
         let clearStyle = {
             position: 'absolute',
             right: '5px',
-            top: '0',
+            top: '0px',
             display: this._getCompletedTodos(props).length ? 'block' : 'none'
         };
         if (UI.windowWidth() <= UI.BREAK_POINT) {
