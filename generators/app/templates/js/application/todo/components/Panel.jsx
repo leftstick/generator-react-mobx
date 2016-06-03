@@ -1,8 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Paper from 'material-ui/lib/paper';
-import StylePropable from 'material-ui/lib/mixins/style-propable';
+import Paper from 'material-ui/Paper';
 import _ from 'lodash';
 import UI from 'UI';
 
@@ -52,9 +51,8 @@ class Panel extends React.Component {
     }
 
     render() {
-        let mergeStyles = StylePropable.mergeStyles;
         return (
-            <Paper style={ mergeStyles(this.state.paperStyle) } zDepth={ this.state.zDepth } rounded={ false }>
+            <Paper style={ this.state.paperStyle } zDepth={ this.state.zDepth } rounded={ false }>
               { this.props.children }
             </Paper>
             );

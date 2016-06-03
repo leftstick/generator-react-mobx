@@ -64,13 +64,14 @@ var gen = generators.Base.extend({
                     'https://registry.npmjs.org'
                 ]
             }
-        ], function(answers) {
-            require('date-util');
-            this.answers = answers;
-            this.answers.date = new Date().format('mmm d, yyyy');
-            this.obj = {answers: this.answers};
-            done();
-        }.bind(this));
+        ])
+            .then(function(answers) {
+                require('date-util');
+                self.answers = answers;
+                self.answers.date = new Date().format('mmm d, yyyy');
+                self.obj = {answers: self.answers};
+                done();
+            });
     },
     configuring: function() {
         var path = require('path');
@@ -99,12 +100,12 @@ var gen = generators.Base.extend({
         self.directory(self.templatePath('img'), self.destinationPath('img'));
         self.directory(self.templatePath('font'), self.destinationPath('font'));
         self.copy(self.templatePath('gitignore'), self.destinationPath('.gitignore'));
-        self.copy(self.templatePath('gulpfile.js'), self.destinationPath('gulpfile.js'));
-        self.fs.copyTpl(self.templatePath('index.html'), self.destinationPath('index.html'), self.obj);
-        self.copy(self.templatePath('index.html'), self.destinationPath('index.html'));
+        self.fs.copy(self.templatePath('index.html_vm'), self.destinationPath('index.html_vm'));
         self.fs.copyTpl(self.templatePath('package.json_vm'), self.destinationPath('package.json'), self.obj);
-        self.copy(self.templatePath('webpack.dev.config.js'), self.destinationPath('webpack.dev.config.js'));
-        self.copy(self.templatePath('webpack.prod.config.js'), self.destinationPath('webpack.prod.config.js'));
+        self.fs.copyTpl(self.templatePath('webpack.dev.config.js'),
+            self.destinationPath('webpack.dev.config.js'), self.obj);
+        self.fs.copyTpl(self.templatePath('webpack.prod.config.js'),
+            self.destinationPath('webpack.prod.config.js'), self.obj);
     },
     install: function() {
         this.npmInstall(undefined, {

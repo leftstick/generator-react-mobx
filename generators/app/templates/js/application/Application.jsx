@@ -1,8 +1,8 @@
 'use strict';
 
 import React from 'react';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import lightTheme from 'material-ui/lib/styles/raw-themes/light-raw-theme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import lightTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 import Header from './todo/components/Header.jsx';
 import Footer from './todo/components/Footer.jsx';
@@ -20,7 +20,7 @@ class Application extends React.Component {
     }
 
     getChildContext() {
-        return {muiTheme: ThemeManager.getMuiTheme(lightTheme)};
+        return {muiTheme: getMuiTheme(lightTheme)};
     }
 
     _onTodoAdded(todo) {

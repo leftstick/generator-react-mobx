@@ -3,16 +3,17 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
         index: './js/index.js'
     },
     output: {
-        path: path.resolve(__dirname, 'build', 'js'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].bundle.js',
         chunkFilename: '[id].bundle.js',
-        publicPath: 'js/'
+        publicPath: '/'
     },
     debug: true,
     devtool: 'source-map',
@@ -29,7 +30,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel',
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules)/,
                 query: {
                     presets: [
                         'react',
@@ -55,6 +56,16 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('common.bundle.js')
+        new webpack.optimize.CommonsChunkPlugin('common.bundle.js'),
+        new HtmlWebpackPlugin({
+            title: '<%= answers.name %>',
+            description: '<%= answers.description %>',
+            username: '<%= answers.username %>',
+            filename: 'index.html',
+            inject: 'body',
+            template: 'index.html_vm',
+            favicon: 'img/favicon.ico',
+            hash: false
+        })
     ]
 };

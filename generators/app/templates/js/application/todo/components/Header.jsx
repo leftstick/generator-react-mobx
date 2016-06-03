@@ -1,8 +1,8 @@
 'use strict';
 
 import React from 'react';
-import AppBar from 'material-ui/lib/app-bar';
-import IconButton from 'material-ui/lib/icon-button';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
 import event from 'Event';
 import _ from 'lodash';
 import UI from 'UI';

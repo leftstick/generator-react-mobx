@@ -1,7 +1,8 @@
 'use strict';
 
 import React from 'react';
-import { ListItem, Divider, TextField, Checkbox, IconButton, Styles, Mixins } from 'material-ui';
+import { ListItem, Divider, TextField, Checkbox, IconButton } from 'material-ui';
+import * as Colors from 'material-ui/styles/colors';
 import { isFunction, clone, trim } from 'lodash';
 
 class TodoItem extends React.Component {
@@ -21,7 +22,7 @@ class TodoItem extends React.Component {
             WebkitUserSelect: 'none',
             msUserSelect: 'none',
             textDecoration: completed ? 'line-through' : 'none',
-            color: completed ? Styles.Colors.grey500 : Styles.Colors.black
+            color: completed ? Colors.grey500 : Colors.black
         };
         return itemStyle;
     }
@@ -69,7 +70,10 @@ class TodoItem extends React.Component {
         });
     }
 
-    _saveEdit() {
+    _saveEdit(e) {
+        if(e.type === 'keydown' && e.nativeEvent.keyCode !== 13){
+            return;
+        }
         if (!trim(this.refs.txt.getValue())) {
             return;
         }
@@ -85,7 +89,6 @@ class TodoItem extends React.Component {
     }
 
     render() {
-        let mergeStyles = Mixins.StylePropable.mergeStyles;
 
         let delBtnStyle = {
             display: this.state.showDelete ? 'block' : 'none'
@@ -96,18 +99,19 @@ class TodoItem extends React.Component {
             <div>
               <ListItem onMouseEnter={ this._showDeleteBtn.bind(this) }
                 onMouseLeave={ this._hideDeleteBtn.bind(this) }
-                style={ mergeStyles(this.state.itemStyle) }
+                style={ this.state.itemStyle }
                 primaryText={ this.props.data.text }
                 leftIcon={ <Checkbox onCheck={ this._onCheckItem.bind(this) } defaultChecked={ this.props.data.completed } /> }
-                rightIconButton={ <IconButton style={ mergeStyles(delBtnStyle) } iconClassName="icon-cancel" onClick={ this._onDeleteItem.bind(this) } /> }
+                rightIconButton={ <IconButton style={ delBtnStyle } iconClassName="icon-cancel" onClick={ this._onDeleteItem.bind(this) } /> }
                 onDoubleClick={ this._runInEdit.bind(this) }></ListItem>
               <TextField ref="txt"
-                style={ mergeStyles(this.state.txtStyle) }
-                underlineStyle={ mergeStyles(underlineStyle) }
+                id={ this.props.data.id }
+                style={ this.state.txtStyle }
+                underlineStyle={ underlineStyle }
                 fullWidth={ true }
                 defaultValue={ this.props.data.text }
                 onBlur={ this._saveEdit.bind(this) }
-                onEnterKeyDown={ this._saveEdit.bind(this) }></TextField>
+                onKeyDown={ this._saveEdit.bind(this) }></TextField>
               <Divider />
             </div>
             );

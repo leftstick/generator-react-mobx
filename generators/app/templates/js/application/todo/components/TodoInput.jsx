@@ -1,8 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TextField from 'material-ui/lib/text-field';
-import StylePropable from 'material-ui/lib/mixins/style-propable';
+import TextField from 'material-ui/TextField';
 import uuid from 'uuid';
 import { isFunction, trim } from 'lodash';
 
@@ -13,6 +12,9 @@ class TodoInput extends React.Component {
     }
 
     _onSubmit(e) {
+        if(e.nativeEvent.keyCode !== 13){
+            return;
+        }
         if (isFunction(this.props.onTodoAdded) && trim(this.state.value)) {
             this.props.onTodoAdded({
                 id: uuid.v1(),
@@ -27,7 +29,6 @@ class TodoInput extends React.Component {
     }
 
     render() {
-        let mergeStyles = StylePropable.mergeStyles;
         let inputStyle = {
             padding: '16px 16px 11px 60px',
             boxSizing: 'border-box'
@@ -40,9 +41,9 @@ class TodoInput extends React.Component {
                 fullWidth={ true }
                 value={ this.state.value }
                 onChange={ this._valueChange.bind(this) }
-                style={ mergeStyles(inputStyle) }
-                underlineStyle={ mergeStyles(underlineStyle) }
-                onEnterKeyDown={ this._onSubmit.bind(this) } />
+                style={ inputStyle }
+                underlineStyle={ underlineStyle }
+                onKeyDown={ this._onSubmit.bind(this) } />
             </div>
             );
     }

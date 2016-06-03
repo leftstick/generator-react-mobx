@@ -6,7 +6,7 @@
  *
  */
 'use strict';
-import Splash from 'splash-screen';
+import {Splash} from 'splash-screen';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from 'js/application/Application.jsx';
@@ -27,7 +27,7 @@ class Entrance {
     _destroySplash() {
         let _this = this;
         Splash.destroy();
-        require('splash-screen/splash.min.css').unuse();
+        require('splash-screen/dist/splash.min.css').unuse();
         setTimeout(function() {
             if (Splash.isRunning()) {
                 _this.destroySplash();

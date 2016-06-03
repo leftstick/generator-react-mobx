@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import Checkbox from 'material-ui/lib/checkbox';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
+import Checkbox from 'material-ui/Checkbox';
 import TodoItem from './TodoItem.jsx';
 
 class TodoList extends React.Component {
@@ -34,7 +34,7 @@ class TodoList extends React.Component {
                     return <TodoItem onDelete={ _this.props.onTodoDeleted }
                              onChange={ _this.props.onTodoChanged }
                              key={ todo.id }
-                             data={ todo } />;
+                             data={ todo }/>;
                 }) }
             </List>
             );
