@@ -29,14 +29,8 @@ module.exports = {
             },
             {
                 test: /\.(js|jsx)$/,
-                loader: 'babel',
-                exclude: /(node_modules)/,
-                query: {
-                    presets: [
-                        'react',
-                        'es2015'
-                    ]
-                }
+                loader: 'react-hot!babel?presets[]=react&presets[]=es2015',
+                exclude: /(node_modules)/
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)\w*/,
