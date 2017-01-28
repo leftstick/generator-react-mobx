@@ -63,7 +63,7 @@ Open [http://localhost:8080](http://localhost:8080) to watch the released versio
 ## References ##
 
 1. [yeoman](http://yeoman.io/)
-2. [webpack](http://webpack.github.io/)
+2. [webpack](https://webpack.js.org/)
 3. [es6-features](https://github.com/lukehoban/es6features)
 4. [react](http://facebook.github.io/react/)
 5. [material-ui](http://material-ui.com)
