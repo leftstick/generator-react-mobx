@@ -1,9 +1,6 @@
-'use strict';
-
-var path = require('path');
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -16,39 +13,37 @@ module.exports = {
         publicPath: '/'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.css$/,
-                loader: 'style/useable!css!postcss!'
+                use: ['style-loader/useable', 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.less$/,
-                loader: 'style!css!postcss!less!'
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
             },
             {
                 test: /\.(js|jsx)$/,
-                loader: 'babel',
-                exclude: /(node_modules|bower_components)/,
-                query: {
-                    presets: [
-                        'react',
-                        'es2015'
-                    ]
-                }
+                use: [
+                    'react-hot-loader',
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015', 'react']
+                        }
+                    }
+                ],
+                exclude: /(node_modules)/
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)\w*/,
-                loader: 'file'
+                use: ['file-loader']
             }
         ]
     },
-    postcss: function() {
-        return [
-            autoprefixer({browsers: ['last 5 versions']})
-        ];
-    },
     resolve: {
-        root: [
+        modules: [
+            path.resolve(__dirname, 'node_modules'),
             path.resolve(__dirname),
             path.resolve(__dirname, 'js', 'fw', 'lib')
         ]

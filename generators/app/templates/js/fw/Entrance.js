@@ -4,8 +4,7 @@
  *  @author  <%= answers.username %>
  *  @date    <%= answers.date %>
  *
- */
-'use strict';
+ **/
 import {Splash} from 'splash-screen';
 import React from 'react';
 import ReactDOM from 'react-dom';
