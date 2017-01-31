@@ -9,7 +9,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[hash].[name].bundle.js',
-        chunkFilename: '[hash].[id].bundle.js',
+        chunkFilename: '[hash].[id].bundle.js'
     },
     module: {
         rules: [
