@@ -1,4 +1,4 @@
-generator-mobx-react
+generator-react-mobx
 ==================
 [![NPM version][npm-image]][npm-url]
 ![][david-url]
@@ -7,22 +7,22 @@ generator-mobx-react
 
 Yeoman generator for react, with mobx as state machine
 
-> You can view the online demo at: [http://leftstick.github.io/generator-mobx-react](http://leftstick.github.io/generator-mobx-react)
+> You can view the online demo at: [http://leftstick.github.io/generator-react-mobx](http://leftstick.github.io/generator-react-mobx)
 
 ## Prerequisites ##
 
 1. Install [yeoman](http://yeoman.io/): `npm install -g yo`
-2. Install __this__: `npm install -g generator-mobx-react`
+2. Install __this__: `npm install -g generator-react-mobx`
 
 > prepend with `sudo` if you are running on `*nix` OS.
 
-## Use `generator-mobx-react` ##
+## Use `generator-react-mobx` ##
 
 `yo mobx-react`
 
 > Answer questions as following demonstrated
 
-![](https://raw.githubusercontent.com/leftstick/generator-mobx-react/master/docs/img/questions.png)
+![](https://raw.githubusercontent.com/leftstick/generator-react-mobx/master/docs/img/questions.png)
 
 And then, project generated.
 
@@ -60,11 +60,11 @@ You can copy the `dist` folder to anywhere you like, it's the released app.
 
 ## LICENSE ##
 
-[MIT License](https://raw.githubusercontent.com/leftstick/generator-mobx-react/master/LICENSE)
+[MIT License](https://raw.githubusercontent.com/leftstick/generator-react-mobx/master/LICENSE)
 
 
-[npm-url]: https://npmjs.org/package/generator-mobx-react
-[npm-image]: https://badge.fury.io/js/generator-mobx-react.png
-[david-url]: https://david-dm.org/leftstick/generator-mobx-react.png
-[dt-url]:https://img.shields.io/npm/dt/generator-mobx-react.svg
-[license-url]:https://img.shields.io/npm/l/generator-mobx-react.svg
+[npm-url]: https://npmjs.org/package/generator-react-mobx
+[npm-image]: https://badge.fury.io/js/generator-react-mobx.png
+[david-url]: https://david-dm.org/leftstick/generator-react-mobx.png
+[dt-url]:https://img.shields.io/npm/dt/generator-react-mobx.svg
+[license-url]:https://img.shields.io/npm/l/generator-react-mobx.svg
