@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import DevTools from 'mobx-react-devtools'
 import { AppContainer } from 'react-hot-loader'
 import TodoApp from './components/TodoApp'
 
@@ -19,7 +20,10 @@ if (module.hot) {
 function render(Component) {
   ReactDOM.render(
     <AppContainer>
-      <Component store={store} />
+      <React.Fragment>
+        <DevTools />
+        <Component store={store} />
+      </React.Fragment>
     </AppContainer>,
     document.getElementById('application')
   )

@@ -1,6 +1,4 @@
 import React from 'react'
-import DevTools from 'mobx-react-devtools'
-
 import { PropTypes } from 'mobx-react'
 
 import TodoHeader from './header/TodoHeader'
@@ -20,7 +18,6 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div styleName="todoapp">
-        <DevTools />
         <CloseSafe />
         <TodoHeader />
         <TodoPanel />
