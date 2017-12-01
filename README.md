@@ -18,7 +18,7 @@ Yeoman generator for react, with mobx as state machine
 
 ## Use `generator-react-mobx` ##
 
-`yo mobx-react`
+`yo react-mobx`
 
 > Answer questions as following demonstrated
 
