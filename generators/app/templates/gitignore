@@ -1,14 +1,11 @@
-#css
-css
+# dependencies
+/node_modules
+package-lock.json
 
-#build
-build
+# production
+/dist
 
-#mac
+# misc
 .DS_Store
 
-npm-debug.log
-
-*.bundle.js
-
-node_modules
+npm-debug.log*

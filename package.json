@@ -1,6 +1,6 @@
 {
   "name": "generator-material-react",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "description": "Yeoman generator for React Material-UI with webpack",
   "repository": {
     "type": "git",
@@ -16,8 +16,7 @@
   "keywords": [
     "yeoman-generator",
     "react",
-    "material",
-    "webpack"
+    "mobx"
   ],
   "author": "Howard.Zuo",
   "license": "MIT",
@@ -26,8 +25,7 @@
   },
   "homepage": "https://github.com/leftstick/generator-material-react#readme",
   "dependencies": {
-    "date-util": "^1.2.1",
     "lodash": "^4.17.4",
-    "yeoman-generator": "^1.1.0"
+    "yeoman-generator": "^2.0.1"
   }
 }

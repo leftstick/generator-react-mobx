@@ -1,0 +1,16 @@
+{
+  "presets": [["es2015", { "modules": false }]],
+  "plugins": [
+    [
+      "react-css-modules",
+      {
+        "generateScopedName": "[path]_[name]_[local]_[hash:base64:5]"
+      }
+    ],
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-react-jsx",
+    "transform-object-rest-spread",
+    "react-hot-loader/babel"
+  ]
+}

@@ -1,0 +1,7 @@
+.todoapp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 550px;
+}
