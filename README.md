@@ -43,7 +43,7 @@ Open [http://localhost:8080/](http://localhost:8080/) to see the playable skelet
 
 Move the root of the created project.
 
-Run `npm run dist` to compile all the source code into webpack bundles. And all required resources are generated into `{root}/dist/`.
+Run `npm run build` to compile all the source code into webpack bundles. And all required resources are generated into `{root}/dist/`.
 
 You can copy the `dist` folder to anywhere you like, it's the released app.
 
